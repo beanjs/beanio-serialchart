@@ -19,11 +19,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i
+        cache: 'yarn'
+    - run: yarn i
     
     - name: Install vsce
-      run: npm i -g vsce
+      run: yarn i -g vsce
       
     - name: Publish
       run: vsce publish -p ${{ secrets.VSCE_PAT }}
