@@ -23,7 +23,7 @@ jobs:
     - run: yarn install
     
     - name: Install vsce
-      run: yarn install -g vsce
+      run: yarn global add vsce
       
     - name: Publish
       run: vsce publish -p ${{ secrets.VSCE_PAT }}
