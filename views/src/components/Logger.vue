@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="control-container">
-      <button @click="onClick">{{ props.running ? 'Start' : 'Stop' }}</button>
+      <button @click="onClick">{{ props.running ? 'Stop' : 'Start' }}</button>
       <select v-model="levelRef">
         <option value="info">info</option>
         <option value="warn">warn</option>

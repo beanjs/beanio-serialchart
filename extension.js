@@ -84,18 +84,18 @@ function activate (context) {
       panels[portSelected] = panel
       serial.open()
 
-      const tmr = setInterval(() => {
-        panel.webview.postMessage({
-          action: 'recv',
-          data: Math.random() * 1000
-        })
-      }, 2000)
+      // const tmr = setInterval(() => {
+      //   panel.webview.postMessage({
+      //     action: 'recv',
+      //     data: Math.random() * 1000
+      //   })
+      // }, 2000)
 
       panel.onDidDispose(() => {
         delete panels[portSelected]
         reader.destroy()
         serial.close()
-        clearInterval(tmr)
+        // clearInterval(tmr)
       })
     }
   )
