@@ -20,10 +20,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - run: yarn i
+    - run: yarn install
     
     - name: Install vsce
-      run: yarn i -g vsce
+      run: yarn install -g vsce
       
     - name: Publish
       run: vsce publish -p ${{ secrets.VSCE_PAT }}
