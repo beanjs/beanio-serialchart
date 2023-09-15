@@ -1,0 +1,64 @@
+{
+  "name": "beanio-serialchart",
+  "displayName": "beanio-serialchart",
+  "description": "analyze serial port data using charts",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "beanio-serialchart.run-script",
+          "group": "beanio",
+          "when": "resourceExtname == .js"
+        },
+        {
+          "command": "beanio-serialchart.new-script",
+          "group": "beanio"
+        }
+      ],
+      "file/newFile": [
+        {
+          "command": "beanio-serialchart.new-script",
+          "group": "beanio"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "beanio-serialchart.run-script",
+        "title": "BeanIO: Run Chart Script",
+        "enablement": "resourceExtname == .js"
+      },
+      {
+        "command": "beanio-serialchart.new-script",
+        "title": "BeanIO: New Chart Script"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.82.0",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "serialport": "^12.0.0"
+  }
+}
