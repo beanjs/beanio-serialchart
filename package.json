@@ -1,11 +1,12 @@
 {
   "name": "beanio-serialchart",
-  "displayName": "beanio-serialchart",
+  "displayName": "serialchart",
   "description": "analyze serial port data using charts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.82.0"
   },
+  "publisher": "beanio",
   "categories": [
     "Other"
   ],
