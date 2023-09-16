@@ -74,9 +74,13 @@ function activate (context) {
       const script = window.activeTextEditor.document.getText()
       panel.webview.postMessage({ action: 'eval', data: script })
 
+      const baudrate = workspace
+        .getConfiguration()
+        .get('beanio.serialchart.baudrate')
+
       const serial = new SerialPort({
         path: portSelected,
-        baudRate: 115200,
+        baudRate: baudrate,
         autoOpen: false
       })
       serial.pipe(reader)

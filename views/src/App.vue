@@ -19,7 +19,7 @@ import { LegendComponent, TooltipComponent, GridComponent, DataZoomComponent } f
 import VChart from 'vue-echarts'
 
 import Logger, { LoggerExpose } from '@/components/Logger.vue';
-import { ref, onMounted, onUnmounted, getCurrentInstance, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, getCurrentInstance, nextTick, inject } from 'vue'
 
 use([
   CanvasRenderer,
@@ -31,6 +31,7 @@ use([
   DataZoomComponent
 ])
 
+const version = inject("version") as string
 const win: any = window
 const ins = getCurrentInstance()
 const chartContainerRef = ref<any>()
@@ -210,6 +211,8 @@ onMounted(() => {
   })
 
   window.addEventListener('resize', resizeChart)
+
+  loggerRef.value?.info(`version:${version}`)
 })
 
 onUnmounted(async () => {

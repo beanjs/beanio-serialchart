@@ -2,7 +2,7 @@
   "name": "beanio-serialchart",
   "displayName": "serialchart",
   "description": "analyze serial port data using charts",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.82.0"
   },
@@ -42,7 +42,17 @@
         "command": "beanio-serialchart.new-script",
         "title": "BeanIO: New Chart Script"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "BeanIO",
+      "properties": {
+        "beanio.serialchart.baudrate": {
+          "type": "integer",
+          "default": 115200,
+          "description": "serial port baudrate"
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
