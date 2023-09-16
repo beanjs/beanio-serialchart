@@ -96,6 +96,10 @@ const findChart = async (idx: number) => {
   return refs[0]
 }
 
+const resizeChart = async () => {
+  chartHeight.value = chartContainerRef.value.clientHeight / chartsRef.value
+}
+
 const initMultipleChart = async (series: string[][]) => {
   chartSeries.value = []
   const len = Math.min(series.length, chartsRef.value)
@@ -179,7 +183,7 @@ onMounted(() => {
         const series = Array.isArray(runtime.series[0]) ? runtime.series : [runtime.series]
         chartsRef.value = series.length
         if (chartsRef.value > chartMax) chartsRef.value = chartMax
-        chartHeight.value = chartContainerRef.value.clientHeight / chartsRef.value
+        await resizeChart()
 
         nextTick(async () => {
           await initMultipleChart(series)
@@ -204,6 +208,8 @@ onMounted(() => {
       loggerRef.value?.error(e as string)
     }
   })
+
+  window.addEventListener('resize', resizeChart)
 })
 
 onUnmounted(async () => {
