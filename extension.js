@@ -44,6 +44,11 @@ function activate (context) {
         return
       }
 
+      const configuration = workspace.getConfiguration()
+      const baudrate = configuration.get('beanio.serialchart.baudrate')
+      const loglines = configuration.get('beanio.serialchart.loglines')
+      const chartpoints = configuration.get('beanio.serialchart.chartpoints')
+
       const distpath = path.join(context.extensionPath, 'views/dist/assets')
       const panel = await window.createWebviewPanel(
         portSelected,
@@ -73,10 +78,10 @@ function activate (context) {
 
       const script = window.activeTextEditor.document.getText()
       panel.webview.postMessage({ action: 'eval', data: script })
-
-      const baudrate = workspace
-        .getConfiguration()
-        .get('beanio.serialchart.baudrate')
+      panel.webview.postMessage({
+        action: 'config',
+        data: { loglines, chartpoints }
+      })
 
       const serial = new SerialPort({
         path: portSelected,

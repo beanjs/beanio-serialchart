@@ -2,7 +2,7 @@
   "name": "beanio-serialchart",
   "displayName": "serialchart",
   "description": "analyze serial port data using charts",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "engines": {
     "vscode": "^1.82.0"
   },
@@ -50,6 +50,16 @@
           "type": "integer",
           "default": 115200,
           "description": "serial port baudrate"
+        },
+        "beanio.serialchart.loglines": {
+          "type": "integer",
+          "default": 200,
+          "description": "log lines to display"
+        },
+        "beanio.serialchart.chartpoints": {
+          "type": "integer",
+          "default": 6000,
+          "description": "chart points to display"
         }
       }
     }

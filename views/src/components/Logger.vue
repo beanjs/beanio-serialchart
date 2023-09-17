@@ -24,7 +24,8 @@
 import { ref, nextTick } from 'vue'
 
 export interface LoggerProps {
-  running: boolean
+  running: boolean,
+  lineMax: number
 }
 
 export interface LoggerExpose {
@@ -70,7 +71,7 @@ const log = (msg: string, level: string) => {
   const sln = l2n(levelRef.value)
   if (ln > sln) return
 
-  if (lines.value.length > 200) {
+  if (lines.value.length > props.lineMax) {
     lines.value.shift()
   }
 

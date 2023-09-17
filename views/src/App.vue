@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="logger-container">
-      <logger v-model:running="chartReady" ref="loggerRef"></logger>
+      <logger v-model:running="chartReady" :line-max="loggerLineMax" ref="loggerRef"></logger>
     </div>
   </div>
 </template>
@@ -36,9 +36,10 @@ const win: any = window
 const ins = getCurrentInstance()
 const chartContainerRef = ref<any>()
 const loggerRef = ref<LoggerExpose | null>(null)
+const loggerLineMax = ref<number>(200)
 const chartsRef = ref<number>(0)
 const chartMax = 2
-const chartDataMax = 6000
+const chartPointMax = ref<number>(6000)
 const chartHeight = ref<number>(100)
 const chartSeries = ref<LineSeriesOption[][]>([])
 const chartReady = ref<boolean>(false)
@@ -141,7 +142,7 @@ const updateMultipleChart = async (data: Array<Array<number> | null>) => {
       const c = cs[j]
 
       const cl = c.data?.length as number
-      if (cl > chartDataMax) {
+      if (cl > chartPointMax.value) {
         c.data?.shift()
       }
 
@@ -203,6 +204,10 @@ onMounted(() => {
           const raws = chartsRef.value == 1 ? [res] : res;
           updateMultipleChart(raws)
         }
+      } else if (action == 'config') {
+        console.log(e.data)
+        loggerLineMax.value = data.loglines
+        chartPointMax.value = data.chartpoints
       }
     } catch (e) {
       console.log(e)
