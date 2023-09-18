@@ -91,7 +91,11 @@ function activate (context) {
       serial.pipe(reader)
 
       panels[portSelected] = panel
-      serial.open()
+      serial.open(async e => {
+        if (!e) return
+        await panel.dispose()
+        await window.showErrorMessage(e.message)
+      })
 
       // const tmr = setInterval(() => {
       //   panel.webview.postMessage({
