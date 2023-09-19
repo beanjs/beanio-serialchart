@@ -77,11 +77,11 @@ function activate (context) {
       })
 
       const script = window.activeTextEditor.document.getText()
-      panel.webview.postMessage({ action: 'eval', data: script })
       panel.webview.postMessage({
         action: 'config',
         data: { loglines, chartpoints }
       })
+      panel.webview.postMessage({ action: 'eval', data: script })
 
       const serial = new SerialPort({
         path: portSelected,
