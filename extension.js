@@ -135,6 +135,10 @@ function deactivate () {}
 const template = `
 // BeanIO SerialChart Script
 const runtime = window.$runtime
+// log output
+// runtime.info('info message')
+// runtime.warn('warn message')
+// runtime.error('error message')
 
 runtime.series = ['raw']
 

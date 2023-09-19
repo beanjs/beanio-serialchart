@@ -38,7 +38,7 @@ const chartContainerRef = ref<any>()
 const loggerRef = ref<LoggerExpose | null>(null)
 const loggerLineMax = ref<number>(200)
 const chartsRef = ref<number>(0)
-const chartMax = 2
+const chartMax = 3
 const chartPointMax = ref<number>(6000)
 const chartHeight = ref<number>(100)
 const chartSeries = ref<LineSeriesOption[][]>([])
@@ -56,7 +56,9 @@ const option = {
   },
   grid: [{
     left: '0%',
-    right: '48px'
+    right: '48px',
+    bottom: '8px',
+    top: '16px'
   }],
   dataZoom: [
     {
@@ -100,6 +102,15 @@ const findChart = async (idx: number) => {
 
 const resizeChart = async () => {
   chartHeight.value = chartContainerRef.value.clientHeight / chartsRef.value
+  // const minHeight = window.innerHeight / 4
+  // if (chartHeight.value < minHeight) {
+  //   chartHeight.value = minHeight
+  // }
+
+  // console.log({
+  //   chartHeight: chartHeight.value,
+  //   minHeight
+  // })
 }
 
 const initMultipleChart = async (series: string[][]) => {
@@ -234,6 +245,7 @@ onUnmounted(async () => {
 .charts-container {
   height: 0;
   flex-grow: 3;
+  // overflow-y: scroll;
 }
 
 .logger-container {
