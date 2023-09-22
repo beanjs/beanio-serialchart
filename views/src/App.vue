@@ -19,7 +19,7 @@ import { LegendComponent, TooltipComponent, GridComponent, DataZoomComponent } f
 import VChart from 'vue-echarts'
 
 import Logger, { LoggerExpose } from '@/components/Logger.vue';
-import { ref, onMounted, onUnmounted, getCurrentInstance, nextTick, inject } from 'vue'
+import { ref, onMounted, onUnmounted, getCurrentInstance, nextTick } from 'vue'
 
 use([
   CanvasRenderer,
@@ -31,7 +31,7 @@ use([
   DataZoomComponent
 ])
 
-const version = inject("version") as string
+// const version = inject("version") as string
 const win: any = window
 const ins = getCurrentInstance()
 const chartContainerRef = ref<any>()
@@ -57,10 +57,28 @@ const option = {
   grid: [{
     left: '0%',
     right: '48px',
-    bottom: '8px',
-    top: '16px'
+    bottom: '16px',
+    top: '32px'
   }],
   dataZoom: [
+    // {
+    //   type: 'slider',
+    //   realtime: true,
+    //   xAxisIndex: 0,
+    //   // filterMode: 'none'
+    // },
+    // {
+    //   type: 'slider',
+    //   realtime: true,
+    //   yAxisIndex: 0,
+    //   // filterMode: 'none'
+    // },
+    // {
+    //   type: 'inside',
+    //   realtime: true,
+    //   yAxisIndex: 0,
+    //   // filterMode: 'none'
+    // }
     {
       show: true,
       realtime: true,
@@ -84,6 +102,7 @@ const option = {
     axisLabel: {
       inside: true,
     },
+    // axisLine: { onZero: false }
   },
   // series: [
   //   {
@@ -216,9 +235,10 @@ onMounted(() => {
           updateMultipleChart(raws)
         }
       } else if (action == 'config') {
-        console.log(e.data)
         loggerLineMax.value = data.loglines
         chartPointMax.value = data.chartpoints
+
+        loggerRef.value?.info(`version:${data.version}`)
       }
     } catch (e) {
       console.log(e)
@@ -228,7 +248,7 @@ onMounted(() => {
 
   window.addEventListener('resize', resizeChart)
 
-  loggerRef.value?.info(`version:${version}`)
+  // loggerRef.value?.info(`version:${version}`)
 })
 
 onUnmounted(async () => {

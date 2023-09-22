@@ -11,6 +11,7 @@ const {
 const { SerialPort, ReadlineParser } = require('serialport')
 const path = require('path')
 const { readFile } = require('fs/promises')
+const pkg = require('./package.json')
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -79,7 +80,7 @@ function activate (context) {
       const script = window.activeTextEditor.document.getText()
       panel.webview.postMessage({
         action: 'config',
-        data: { loglines, chartpoints }
+        data: { loglines, chartpoints, version: pkg.version }
       })
       panel.webview.postMessage({ action: 'eval', data: script })
 
