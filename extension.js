@@ -89,6 +89,10 @@ function activate (context) {
         baudRate: baudrate,
         autoOpen: false
       })
+      serial.on('error', e => {
+        window.showErrorMessage(e.message)
+      })
+
       serial.pipe(reader)
 
       panels[portSelected] = panel
